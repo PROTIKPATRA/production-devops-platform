@@ -1,7 +1,7 @@
 replicaCount: 2
 image:
   repository: ghcr.io/protikpatra/production-devops-platform
-  tag: latest
+  tag: e3a5ae7eec17b89e87343a249bb1f0f817643069
   pullPolicy: Always
 database:
   host: postgres-service
