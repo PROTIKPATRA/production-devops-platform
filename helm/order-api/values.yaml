@@ -1,0 +1,26 @@
+replicaCount: 2
+
+image:
+  repository: your-dockerhub-user/order-api
+  tag: latest # This will be dynamically replaced by GitHub Actions
+  pullPolicy: Always
+
+database:
+  host: postgres-service
+  name: orders_db
+  user: postgres
+  password: SuperSecretPassword123! # In production, this would be injected via external secrets
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 75

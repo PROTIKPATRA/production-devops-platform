@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+data:
+  DB_HOST: {{ .Values.database.host | quote }}
+  DB_NAME: {{ .Values.database.name | quote }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Release.Name }}-secret
+type: Opaque
+stringData:
+  DB_USER: {{ .Values.database.user | quote }}
+  DB_PASSWORD: {{ .Values.database.password | quote }}
