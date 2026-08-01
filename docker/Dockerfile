@@ -2,13 +2,10 @@
 FROM maven:3.9.6-eclipse-temurin-21 AS builder
 WORKDIR /build
 
-# Copy dependencies definition and cache layers
+# Copy source code and POM together, then build
 COPY app/pom.xml .
-RUN mvn dependency:go-offline -B
-
-# Copy source code and build package
 COPY app/src ./src
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests -B
 
 # Stage 2: Minimal runtime image
 FROM eclipse-temurin:21-jre-jammy
